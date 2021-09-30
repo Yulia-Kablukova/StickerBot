@@ -1,2 +1,1 @@
-a = input()
-print(a)
+print("Hello, world! It's DEVchuli team.")
