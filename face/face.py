@@ -2,14 +2,16 @@ import pickle
 import cv2
 
 
-def recognize(path):
+def recognize(path, gender):
     face_cascade = cv2.CascadeClassifier(r'cascades\haarcascades\haarcascade_frontalface_alt2.xml')
 
     recognizer = cv2.face.LBPHFaceRecognizer_create()
-    recognizer.read(r'recognizers\face-trainner.yml')
+    recognizer_path = r'recognizers\face-trainner-' + gender + '.yml'
+    recognizer.read(recognizer_path)
 
+    pickle_path = r'recognizers\pickles\face-labels-' + gender + '.pickle'
     labels = {"person_name": 1}
-    with open(r'recognizers\pickles\face-labels.pickle', 'rb') as f:
+    with open(pickle_path, 'rb') as f:
         og_labels = pickle.load(f)
         labels = {v: k for k, v in og_labels.items()}
 
